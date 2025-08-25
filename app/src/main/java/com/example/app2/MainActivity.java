@@ -26,7 +26,7 @@ public class MainActivity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
-        textView=findViewById(R.id.tv);
+        textView=findViewById(R.id.tvResultado);
         textView.setText(Integer.toString(cont));
         textView.setOnClickListener((View v)-> {
             textView.setText(Integer.toString(cont++));

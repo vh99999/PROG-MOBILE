@@ -1,6 +1,7 @@
 package com.example.app2;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
@@ -31,8 +32,41 @@ public class MainActivity extends AppCompatActivity {
             textView.setText(Integer.toString(cont++));
         });
 
-
+        Log.d("ciclo_vida", "onCreate");
 
 
     }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        Log.d("ciclo_vida", "onStart");
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        Log.d("ciclo_vida", "onResume");
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        Log.d("ciclo_vida", "onPause");
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        Log.d("ciclo_vida", "onStop");
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        Log.d("ciclo_vida", "onDestroy");
+
+    }
+
+
 }

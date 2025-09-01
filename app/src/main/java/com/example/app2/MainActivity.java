@@ -3,6 +3,8 @@ package com.example.app2;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import androidx.activity.EdgeToEdge;
@@ -11,10 +13,13 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import java.util.Random;
+
 public class MainActivity extends AppCompatActivity {
 
-    TextView textView;
-    int cont = 0;
+     Button button; //aponta para null
+    EditText editMin, editMax;
+    TextView tvResultado;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,15 +31,24 @@ public class MainActivity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
-        textView=findViewById(R.id.tvResultado);
-        textView.setText(Integer.toString(cont));
-        textView.setOnClickListener((View v)-> {
-            textView.setText(Integer.toString(cont++));
+
+        button = findViewById(R.id.button);
+        editMin = findViewById(R.id.edMin);
+        editMax = findViewById(R.id.edMax);
+        tvResultado = findViewById(R.id.tvResultado);
+
+
+        button.setOnClickListener(v -> {
+            Random random = new Random();
+            int min,max;
+            min = Integer.parseInt(editMin.getText().toString());
+            max = Integer.parseInt(editMax.getText().toString());
+            int delta = (max - min);
+
+
+            int sorteio = random.nextInt(delta) + min;
+            tvResultado.setText(Integer.toString(sorteio));
         });
-
-        Log.d("ciclo_vida", "onCreate");
-
-
     }
 
     @Override

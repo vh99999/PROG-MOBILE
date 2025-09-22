@@ -28,7 +28,11 @@ public class IMC_Resultado extends AppCompatActivity {
 
         });
 
-
+        tvIMC = findViewById(R.id.tvIMC);
+        tvAltura2 = findViewById(R.id.tvAltura2);
+        tvPeso2 = findViewById(R.id.tvPeso2);
+        tvNome = findViewById(R.id.tvNome);
+        imageView2 = findViewById(R.id.imageView2);
 
 
         Intent i = getIntent();
@@ -46,7 +50,9 @@ public class IMC_Resultado extends AppCompatActivity {
 
         imageView2.setImageResource(R.drawable.perfil);
 
-        if(imc<18.9){imageView2.setImageResource(R.drawable.abaixopeso);}
+        if(imc<18.9){imageView2.setImageResource(R.drawable.abaixopeso);
+
+        }
         if(imc>=18.9 && imc < 25){imageView2.setImageResource(R.drawable.normal);}
         if(imc>=25 && imc < 30){imageView2.setImageResource(R.drawable.sobrepeso);}
         if(imc>=30 && imc < 35){imageView2.setImageResource(R.drawable.obesidade1);}

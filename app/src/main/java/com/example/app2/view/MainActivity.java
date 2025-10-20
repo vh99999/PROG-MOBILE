@@ -15,6 +15,8 @@ import androidx.core.view.WindowInsetsCompat;
 
 import com.example.app2.R;
 import com.example.app2.controller.PlanetaController;
+import com.example.app2.model.Planeta;
+import com.example.app2.model.PlanetaAdapter;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -42,7 +44,9 @@ public class MainActivity extends AppCompatActivity {
             return insets;
         });
 
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(getApplicationContext(), android.R.layout.simple_list_item_1, android.R.id.text1, planetaController.getNomesPlanetas());
+        PlanetaAdapter adapter = new PlanetaAdapter(this,
+                R.layout.item_lista,
+                planetaController.getPlanetas());
         listView.setAdapter(adapter);
     }
 }

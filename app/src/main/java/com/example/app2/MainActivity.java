@@ -1,6 +1,8 @@
 package com.example.app2;
 
+import android.annotation.SuppressLint;
 import android.content.ContentValues;
+import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
@@ -40,16 +42,27 @@ public class MainActivity extends AppCompatActivity {
         });
 
         db = openOrCreateDatabase("mdb.db", MODE_PRIVATE, null);
-        db.execSQL("CREATE TABLE IF NOT EXISTS notas (id INTEGER PRIMARY KEY AUTOINCREMENT, titulo VARCHAR, texto TEXT)");
+        db.execSQL("CREATE TABLE IF NOT EXISTS notas (id INTEGER PRIMARY KEY AUTOINCREMENT, titulo VARCHAR, nota TEXT)");
         carregarLista();
         salvar.setOnClickListener(v -> {
-            EditText et = findViewById(R.id.editTextText);
+
+            EditText et = findViewById(R.id.esTexto);
+            EditText eTitulo = findViewById(R.id.edTitulo);
+
             String titulo = et.getText().toString();
+            String texto = eTitulo.getText().toString();
+
             ContentValues cv = new ContentValues();
-            cv.put("titulo", String.valueOf(et.getText()));
+
+            cv.put("titulo", titulo);
+            cv.put("nota", texto);
+
             db.insert("notas", null, cv);
+
             Toast.makeText(this, "Butes", Toast.LENGTH_SHORT).show();
+
             carregarLista();
+
         });
 
     }
@@ -60,15 +73,26 @@ public class MainActivity extends AppCompatActivity {
        cursor.moveToFirst();
 
        while (!cursor.isAfterLast()) {
+
            String titulo = cursor.getString(cursor.getColumnIndex("titulo"));
+           String nota = cursor.getString(cursor.getColumnIndex("nota"));
+
            listaNotas.add(titulo);
+           listaNotas.add(nota);
+
            cursor.moveToNext();
+
        }
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, listaNotas);
        listView.setAdapter(adapter);
+
        listView.setOnItemClickListener( (parent, view, position, id) -> {
-               db.delete("notas", null, null);
-               carregarLista();
+           Intent intent = new Intent(this, MainActivity2.class);
+            Bundle b = new Bundle();
+            String s = listView.getItemAtPosition(position).toString();
+            b.putString("Posicao", s);
+            intent.putExtras(b);
+            startActivity(intent);
            });
        }
     }

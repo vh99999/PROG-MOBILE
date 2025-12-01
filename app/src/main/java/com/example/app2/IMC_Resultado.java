@@ -2,6 +2,7 @@ package com.example.app2;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -15,6 +16,8 @@ public class IMC_Resultado extends AppCompatActivity {
 
     TextView tvNome, tvPeso2, tvAltura2, tvIMC;
     ImageView imageView2;
+
+    Button btn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,6 +36,7 @@ public class IMC_Resultado extends AppCompatActivity {
         tvPeso2 = findViewById(R.id.tvPeso2);
         tvNome = findViewById(R.id.tvNome);
         imageView2 = findViewById(R.id.imageView2);
+        btn = findViewById(R.id.btnVoltar);
 
 
         Intent i = getIntent();
@@ -56,6 +60,12 @@ public class IMC_Resultado extends AppCompatActivity {
         if(imc>=18.9 && imc < 25){imageView2.setImageResource(R.drawable.normal);}
         if(imc>=25 && imc < 30){imageView2.setImageResource(R.drawable.sobrepeso);}
         if(imc>=30 && imc < 35){imageView2.setImageResource(R.drawable.obesidade1);}
+
+        btn.setOnClickListener(v -> {
+
+                Intent intent = new Intent(this, MainActivity.class);
+                startActivity(intent);
+        });
 
 
 

@@ -46,20 +46,17 @@ public class MainActivity extends AppCompatActivity {
         carregarLista();
         salvar.setOnClickListener(v -> {
 
-            EditText et = findViewById(R.id.esTexto);
             EditText eTitulo = findViewById(R.id.edTitulo);
 
-            String titulo = et.getText().toString();
-            String texto = eTitulo.getText().toString();
+            String titulo = eTitulo.getText().toString();
 
             ContentValues cv = new ContentValues();
 
             cv.put("titulo", titulo);
-            cv.put("nota", texto);
 
             db.insert("notas", null, cv);
 
-            Toast.makeText(this, "Butes", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Inserido", Toast.LENGTH_SHORT).show();
 
             carregarLista();
 
@@ -75,10 +72,8 @@ public class MainActivity extends AppCompatActivity {
        while (!cursor.isAfterLast()) {
 
            String titulo = cursor.getString(cursor.getColumnIndex("titulo"));
-           String nota = cursor.getString(cursor.getColumnIndex("nota"));
 
            listaNotas.add(titulo);
-           listaNotas.add(nota);
 
            cursor.moveToNext();
 
